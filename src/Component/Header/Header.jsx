@@ -24,6 +24,7 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
+// AIzaSyCxCmLe3mzAyiqrmntYk7aRFsENeLJFnmc
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',

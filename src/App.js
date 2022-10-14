@@ -2,8 +2,10 @@ import React from 'react';
 import Header from './Component/Header/Header';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Grid } from '@mui/material';
-import Map from './Component/Map/Map';
+// import Map from './Component/Map/Map';
 import List from './Component/List/List';
+import Mymap from './Component/Map/Map';
+{/* <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" /> */}
 
 const App= ()=>{
 
@@ -18,7 +20,7 @@ const App= ()=>{
   <List></List>
   </Grid>
   <Grid item xs={12} md={4}>
-    <Map/>
+    <Mymap/>
   </Grid>
 </Grid>
         
