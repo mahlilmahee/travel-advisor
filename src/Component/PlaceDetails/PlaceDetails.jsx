@@ -1,9 +1,10 @@
 import React from 'react';
 
-const PlaceDetails = () => {
+const PlaceDetails = ({data}) => {
+    const {fName}=data
     return (
         <div>
-            <h1> Placedetails</h1>
+            <h1> {fName}</h1>
         </div>
     );
 };
