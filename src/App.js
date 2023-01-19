@@ -12,21 +12,30 @@ import { getPlaceData } from './Api/placeApi';
 const App= ()=>{
 
 const [placeData,setPlaceData]=useState([]);
-const [coordinates,setCoordinates]=useState({});
-const [bound,setBound]=useState({});
+const [coordinates,setCoordinates]=useState({lat:52.520007,lng:13.404954});
+const [bound,setBound]=useState({ });
+
+useEffect(()=>{
+  navigator.geolocation.getCurrentPosition(({coords:{latitude,longitude}})=>{
+    
+    setCoordinates({lat:latitude,lng:longitude})
+  })
+},[])
+
 useEffect(()=>{
 
-  getPlaceData()
+
+  getPlaceData(bound?.sw,bound?.ne)
   .then(data=>{
     setPlaceData(data)
     // console.log(data)
+    // console.log(bound?.sw, 'map matters')
   })
-},[])
+},[coordinates,bound ])
   
 
-console.log(coordinates,'app.js thekee bolsi ami ')
-console.log(bound,'bounds boltesi app theke  ')
-  // here I am gonna load the api data 
+
+
 
 
 
@@ -41,7 +50,7 @@ console.log(bound,'bounds boltesi app theke  ')
   <List placeData={placeData}></List>
   </Grid>
   <Grid item xs={12} md={8}>
-    <Mymap coordinates={coordinates} setCoordinates={setCoordinates} setBound={setBound} />
+    <Mymap coordinates={coordinates} setCoordinates={setCoordinates} placeData={placeData} setBound={setBound} />
   </Grid>
 </Grid>
         
