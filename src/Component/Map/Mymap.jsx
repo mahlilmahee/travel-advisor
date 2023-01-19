@@ -115,25 +115,10 @@ const Mymap = ({ setBound, setCoordinates, coordinates, placeData ,setClickRestu
        
        
       </MapContainer>
+    
     </div>
   );
 };
 
 export default Mymap;
 
-{
-  /* {placeData?.map((place,i)=>{
-
-<> 
-<Marker icon={markerIcon}   position={[
-              Number(place.latitude),Number(place.longitude)
-             ]} >
-<Popup>
-      Welcome I have done this. <br />  Lets find what you need.
-     
-</Popup>
-</Marker>
-</>
-
-     })} */
-}

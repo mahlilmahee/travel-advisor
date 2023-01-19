@@ -18,6 +18,9 @@ const [type, setType] = React.useState("hotels");
 const [rate, setRate] = React.useState("");
 const [clickResturent,setClickResturent]=useState(null)
 const [filteredPlace,setFilteredPlace] = useState('')
+
+
+
 useEffect(()=>{
  const filterplaces=placeData?.filter((place)=> 
  Number(place?.rating) >rate
