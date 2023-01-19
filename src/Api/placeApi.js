@@ -1,9 +1,9 @@
 import { CatchingPokemon } from '@mui/icons-material';
 import axios from 'axios';
 const placeUrl='https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary';
-export  const  getPlaceData=async (sw,ne)=>{
+export  const  getPlaceData=async (sw,ne,type)=>{
     try{
-        const {data:{data}} =await axios.get(placeUrl, {
+        const {data:{data}} =await axios.get(`https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`, {
           params: {
             bl_latitude:sw?.lat,
             tr_latitude: ne?.lat,

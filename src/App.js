@@ -14,6 +14,18 @@ const App= ()=>{
 const [placeData,setPlaceData]=useState([]);
 const [coordinates,setCoordinates]=useState({lat:52.520007,lng:13.404954});
 const [bound,setBound]=useState({ });
+const [type, setType] = React.useState("hotels");
+const [rate, setRate] = React.useState("");
+const [clickResturent,setClickResturent]=useState(null)
+const [filteredPlace,setFilteredPlace] = useState('')
+useEffect(()=>{
+ const filterplaces=placeData?.filter((place)=> 
+ Number(place?.rating) >rate
+ )
+setFilteredPlace(filterplaces)
+console.log(filterplaces, 'finter ')
+
+}, [placeData,rate])
 
 useEffect(()=>{
   navigator.geolocation.getCurrentPosition(({coords:{latitude,longitude}})=>{
@@ -25,13 +37,13 @@ useEffect(()=>{
 useEffect(()=>{
 
 
-  getPlaceData(bound?.sw,bound?.ne)
+  getPlaceData(bound?.sw,bound?.ne,type)
   .then(data=>{
     setPlaceData(data)
     // console.log(data)
     // console.log(bound?.sw, 'map matters')
   })
-},[coordinates,bound ])
+},[coordinates , type,bound])
   
 
 
@@ -47,10 +59,10 @@ useEffect(()=>{
             <Header></Header>
             <Grid container spacing={3} style={{width: '100%'}}>
   <Grid item xs={12} md={4}>
-  <List placeData={placeData}></List>
+  <List type={type} setType={setType} rate={rate} setRate={setRate} placeData={ filteredPlace?.length? filteredPlace: placeData} clickResturent={clickResturent}></List>
   </Grid>
   <Grid item xs={12} md={8}>
-    <Mymap coordinates={coordinates} setCoordinates={setCoordinates} placeData={placeData} setBound={setBound} />
+    <Mymap setClickResturent={setClickResturent} coordinates={coordinates} setCoordinates={setCoordinates}  placeData={ filteredPlace?.length? filteredPlace: placeData} setBound={setBound} />
   </Grid>
 </Grid>
         

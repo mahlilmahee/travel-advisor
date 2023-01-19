@@ -10,10 +10,17 @@ import {
   Popup,
   Marker,
 } from "react-leaflet";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import "leaflet/dist/leaflet.css";
 // import markerIcon from "";
 import L from "leaflet";
 import Mymarker from "./Mymarker";
+import Rating from '@mui/material/Rating';
 <link
   rel="stylesheet"
   href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"
@@ -24,40 +31,10 @@ const markerIcon = new L.Icon({
   iconSize: [35, 45],
 });
 
-const Mymap = ({ setBound, setCoordinates, coordinates, placeData }) => {
+const Mymap = ({ setBound, setCoordinates, coordinates, placeData ,setClickResturent}) => {
   const [isInitialRender, setIsInitialRender] = useState(true);
 
-  //  console.log(latitude,'asi')
-  // const position = [
-  //   [51.49, -0.08],
-  //   [53.5, -0.02],
-  //   [54.5, -0.025],
-  //   [53.6, -0.023],
-  //   [54.7, -0.097],
-  //   [53.8, -0.042],
-  //   [54.9, -0.26],
-  //   [51.49, -0.03428],
-  //   [53.5, -0.0232],
-  //   [54.5, -0.034225],
-  //   [53.6, -0.03423],
-  //   [54.7, -0.09347],
-  //   [53.8, -0.04275],
-  //   [54.9, -0.26352],
-  //   [51.49, -0.05358],
-  //   [53.5, -0.023423],
-  //   [54.5, -0.025234],
-  //   [53.6, -0.0233],
-  //   [54.7, -0.01397],
-  //   [53.8, -0.01142],
-  //   [54.9, -0.126],
-  //   [51.49, -0.618],
-  //   [53.5, -0.112],
-  //   [54.5, -0.225],
-  //   [53.6, -0.14323],
-  //   [54.7, -0.1297],
-  //   [53.8, -0.5342],
-  //   [54.9, -0.626],
-  // ];
+
   return (
     <div style={{ marginTop: "30px" }}>
       <MapContainer
@@ -69,6 +46,7 @@ const Mymap = ({ setBound, setCoordinates, coordinates, placeData }) => {
         center={[51.507351, -0.127758]}
         style={{ height: "75vh", width: "100wh" }}
         zoom={14}
+        children
       >
         map.getBounds()
         <TileLayer
@@ -80,18 +58,38 @@ const Mymap = ({ setBound, setCoordinates, coordinates, placeData }) => {
           return (
             <Marker
               icon={markerIcon}
+              eventHandlers={{
+                click: (child , i) => {
+                  setClickResturent(child)
+                 
+                },
+              }}
               position={[
                 Number(mapdata.latitude)|| 40.13, Number(mapdata.longitude) ||-.232
                
               ]}
             >
-              {
-                console.log(mapdata,'inside from the mapdata ')
-                
-              }
+              
               <Popup>
-                showing you the location of {mapdata.description} <br /> Easily customizable.
-              </Popup>
+              <Rating name="read-only" size="small" value={Number(mapdata.rating)} sx={{marginBottom:'20px'}} readOnly />
+              <Card sx={{ maxWidth: 445 }}>
+      <CardMedia
+        component="img"
+        alt="green iguana"
+        height="140"
+        image={mapdata?.photo?.images?.small?.url}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {mapdata.name}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+         {/* {mapdata.description} */}
+        </Typography>
+      </CardContent>
+      
+    </Card>            
+   </Popup>
             </Marker>
           );
         })}

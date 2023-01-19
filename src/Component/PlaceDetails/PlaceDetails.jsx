@@ -8,8 +8,10 @@ import { Box } from '@material-ui/core';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import Chip from '@mui/material/Chip';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-const PlaceDetails = ({data}) => {
+const PlaceDetails = ({data,selected,refProp}) => {
     // const {name}=data
+
+    if(selected) refProp?.current?.scrollIntoView({behavior:'smooth',block:'start'})
     return (
         <Card sx={{ maxWidth: 345,marginBottom:'10px' }}>
       <CardActionArea>
@@ -19,9 +21,7 @@ const PlaceDetails = ({data}) => {
           image={ data.photo?  data.photo?.images?.large.url  : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
           alt="resutant picture"
         />
-        {
-          console.log(data, 'THis is the data of the resturaneoij')
-        }
+       
         <CardContent>
         <Typography gutterBottom variant="h6">{data.name}</Typography>
         <Box display="flex" justifyContent="space-between" my={2}>
